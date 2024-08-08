@@ -1,6 +1,20 @@
 PACKAGE_NAME          := github.com/bitdaddy89/gb
 GOLANG_CROSS_VERSION  = v1.22-v2.0.0
 
+GOPATH ?= '$(HOME)/go'
+release-dry-run:
+	docker run \
+		--rm \
+		--privileged \
+		-e CGO_ENABLED=1 \
+		-v /var/run/docker.sock:/var/run/docker.sock \
+		-v `pwd`:/go/src/$(PACKAGE_NAME) \
+		-v ${GOPATH}/pkg:/go/pkg \
+		-w /go/src/$(PACKAGE_NAME) \
+		ghcr.io/goreleaser/goreleaser-cross:${GOLANG_CROSS_VERSION} \
+		--clean --skip validate,publish --snapshot
+
+
 .PHONY: release
 release:
 	@if [ ! -f ".release-env" ]; then \
