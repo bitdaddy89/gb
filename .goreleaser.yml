@@ -33,7 +33,7 @@ builds:
       - arm64
     flags:
       - -tags=cgo
-  ldflags:
+    ldflags:
       - -s -w -X github.com/bitdaddy89/gb/version.Name=gb -X github.com/bitdaddy89/gb/version.Version={{.Version}} -X github.com/bitdaddt89/gb/version.Commit={{.Commit}}
   - id: "gb-linux"
     main: ./cmd
