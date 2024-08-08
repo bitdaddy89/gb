@@ -6,7 +6,7 @@ before:
 
 builds:
   - id: "gb-darwin"
-    main: ./cmd
+    main: ./
     binary: bin/gb
     env:
       - CGO_ENABLED=1
@@ -20,38 +20,8 @@ builds:
       - -tags=cgo
     ldflags:
       - -s -w -X github.com/bitdaddy89/gb/version.Name=gb -X github.com/bitdaddy89/gb/version.Version={{.Version}} -X github.com/bitdaddt89/gb/version.Commit={{.Commit}}
-  - id: "gb-darwin-arm64"
-    main: ./cmd
-    binary: bin/gb
-    env:
-      - CGO_ENABLED=1
-      - CC=oa64-clang
-      - CXX=oa64-clang++
-    goos:
-      - darwin
-    goarch:
-      - arm64
-    flags:
-      - -tags=cgo
-    ldflags:
-      - -s -w -X github.com/bitdaddy89/gb/version.Name=gb -X github.com/bitdaddy89/gb/version.Version={{.Version}} -X github.com/bitdaddt89/gb/version.Commit={{.Commit}}
-  - id: "gb-linux"
-    main: ./cmd
-    binary: bin/gb
-    env:
-      - CGO_ENABLED=1
-      - CC=gcc
-      - CXX=g++
-    goos:
-      - linux
-    goarch:
-      - amd64
-    flags:
-      - -tags=cgo
-    ldflags:
-      - -s -w -X github.com/bitdaddy89/gb/version.Name=gb -X github.com/bitdaddy89/gb/version.Version={{.Version}} -X github.com/bitdaddt89/gb/version.Commit={{.Commit}}
   - id: "gb-linux-arm64"
-    main: ./cmd
+    main: ./
     binary: bin/gb
     env:
       - CGO_ENABLED=1
@@ -73,8 +43,6 @@ archives:
         format: zip
     builds:
       - gb-darwin
-      - gb-darwin-arm64
-      - gb-linux
       - gb-linux-arm64
   
 checksum:
